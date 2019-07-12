@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Teacher extends Person{
-    private List<Klass> classList = new ArrayList<Klass>();
+    private List<Klass> classes = new ArrayList<Klass>();
 
     public Teacher(int id, String name, int age) {
         super(id, name, age);
@@ -16,22 +16,24 @@ public class Teacher extends Person{
 
     public Teacher(int id, String name, int age, List<Klass> classList) {
         super(id, name, age);
-        this.classList = classList;
+        this.classes = classList;
     }
 
-    public List<Klass> getClassList() {
-        return classList;
-    }
-
-    public void setClassList(List<Klass> classList) {
-        this.classList = classList;
+    public List<Klass> getClasses() {
+        return classes;
     }
 
     @Override
     public String introduce() {
-        if (classList.size() > 0) {
-            return String.format("%s I am a Teacher. I teach Class 2, 3.", super.introduce(), classList.toString());
+        if (classes.size() > 0) {
+            return String.format("%s I am a Teacher. I teach Class 2, 3.", super.introduce(), classes.toString());
         } else return String.format("%s I am a Teacher. I teach No Class.", super.introduce());
+    }
+
+    public String introduceWith(Student student){
+        if (isTeaching(student)){
+            return String.format("%s I am a Teacher. I teach %s.",super.introduce(),student.getName());
+        }else return String.format("%s I am a Teacher. I don't teach %s.",super.introduce(),student.getName());
     }
 
     public boolean isTeaching(Student student){

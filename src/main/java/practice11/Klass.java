@@ -7,6 +7,7 @@ public class Klass {
     private int number;
     private Student leader;
     private List<Student> studentList = new ArrayList<Student>();
+    private List<Teacher> teachers = new ArrayList<>();
 
     public Klass(int number) {
         this.number = number;
@@ -30,13 +31,27 @@ public class Klass {
         }
         else {
             this.leader = student;
-
-            System.out.print(String.format("I am %s. I know %s has joined %s.\\n",student.getName(),student.getKlass().getDisplayName()));
+            notifyAllTeachers(student,2);
         }
     }
 
     public void appendMember(Student student){
         studentList.add(student);
-        System.out.print(String.format("I am %s. I know %s has joined %s.\\n", student.getName(),student.getKlass().getDisplayName()));
+        notifyAllTeachers(student,1);
+    }
+
+    public void attach(Teacher teacher){
+        teachers.add(teacher);
+    }
+
+    public void notifyAllTeachers(Student student,int event){
+        for (Teacher teacher : teachers){
+            if (event == 1) {
+                teacher.printMesWhenStudentJoinClass(student, this.getDisplayName());
+            }
+            if (event == 2){
+                teacher.printMesWhenStudentAssignLeader(student,this.getDisplayName());
+            }
+        }
     }
 }

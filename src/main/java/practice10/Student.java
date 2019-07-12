@@ -26,7 +26,7 @@ public class Student extends Person {
     }
 
     public boolean isIn(Teacher teacher){
-        for (Klass k : teacher.getClassList()){
+        for (Klass k : teacher.getClasses()){
             if (k == this.getKlass()){
                 return true;
             }
